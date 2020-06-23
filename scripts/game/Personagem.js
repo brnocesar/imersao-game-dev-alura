@@ -1,44 +1,50 @@
 class Personagem {
-    constructor(imagem) {
-        this.imagem = imagem;
-        this.matriz = [
-            [0, 0],
-            [220, 0],
-            [440, 0],
-            [660, 0],
-            [0, 270],
-            [220, 270],
-            [440, 270],
-            [660, 270],
-            [0, 540],
-            [220, 540],
-            [440, 540],
-            [660, 540],
-            [0, 810],
-            [220, 810],
-            [440, 810],
-            [660, 810]
-        ];
-        this.frameAtual = 0;
+    
+    constructor(characterImage, imageWidth, imageHeight, xFrames, yFrames) {
+        
+        this.characterImage  = characterImage;
+        this.matriz          = calculaMatriz();
+        this.currentFrame    = 0;
+        this.characterWidht  = imageWidth / xFrames;
+        this.characterHeight = imageHeight / yFrames;
+
+        function calculaMatriz () {
+            
+            let matriz      = [];
+            let xCharWidth  = imageWidth / xFrames;
+            let yCharHeight = imageHeight / yFrames;
+
+            for (let y = yFrames; y > 0 ; y--) {
+                for (let x = xFrames; x > 0; x--) {
+                    
+                    matriz.push([
+                        imageWidth - x * xCharWidth,
+                        imageHeight - y * yCharHeight,
+                    ]);
+                }
+            }
+            
+            return matriz;
+        };
     }
     
     exibe() {
         image(
-            this.imagem,
-            0, height - 135, // position, relatad to canvas
-            110, 135, // size, relatad to canvas
-            this.matriz[this.frameAtual][0], this.matriz[this.frameAtual][1], // origin position, relatad to image
-            220, 270 // size, relatad to image
+            this.characterImage,                                                  // character-sheet image
+            0, height - this.characterHeight/2,                                   // top-left corner position from character, refers to canvas
+            this.characterWidht/2, this.characterHeight/2,                        // character size, refers to canvas
+            this.matriz[this.currentFrame][0], this.matriz[this.currentFrame][1], // top-left corner position from frame, refers to refers to character-sheet image
+            this.characterWidht, this.characterHeight                             // size of each frame, refers to character-sheet image
         );
         
         this.anima();
     }
     
     anima() {
-        this.frameAtual++;
+        this.currentFrame++;
         
-        if ( this.frameAtual >= this.matriz.length - 1 ) {
-            this.frameAtual = 0;
+        if ( this.currentFrame >= this.matriz.length - 1 ) {
+            this.currentFrame = 0;
         }
     }
 }
