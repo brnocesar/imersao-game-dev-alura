@@ -1,0 +1,23 @@
+{
+    "name": "imersao-game-dev-alura",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.html",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "http-server -c-1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/brnocesar/imersao-game-dev-alura.git"
+    },
+    "author": "brnocesar",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/brnocesar/imersao-game-dev-alura/issues"
+    },
+    "homepage": "https://github.com/brnocesar/imersao-game-dev-alura#readme",
+    "dependencies": {
+        "http-server": "^0.12.3"
+    }
+}
