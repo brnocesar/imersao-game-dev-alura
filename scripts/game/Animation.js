@@ -1,7 +1,7 @@
-class Personagem {
-    
-    constructor(sheetImage, sheetImageWidth, sheetImageHeight, characterWidht, characterHeight, spriteWidth, spriteHeight) {
-        
+class Animation {
+
+    constructor(sheetImage, sheetImageWidth, sheetImageHeight, characterWidht, characterHeight, spriteWidth, spriteHeight, x) {
+
         this.sheetImage       = sheetImage;
         this.sheetImageWidth  = sheetImageWidth;
         this.sheetImageHeight = sheetImageHeight;
@@ -9,6 +9,8 @@ class Personagem {
         this.characterHeight  = characterHeight;
         this.spriteWidth      = spriteWidth;
         this.spriteHeight     = spriteHeight;
+        this.x                = x;
+        this.y                = height - this.characterHeight;
         this.matriz           = calculaMatriz();
         this.currentFrame     = 0;
 
@@ -31,11 +33,11 @@ class Personagem {
             return matriz;
         }
     }
-    
+
     exibe() {
         image(
             this.sheetImage,                                                      // character-sheet image
-            0, height - this.characterHeight,                                     // top-left corner character position, refers to canvas
+            this.x, this.y,                                                       // top-left corner position from character, refers to canvas
             this.characterWidht, this.characterHeight,                            // character size, refers to canvas
             this.matriz[this.currentFrame][0], this.matriz[this.currentFrame][1], // top-left corner position from frame, refers to refers to character-sheet image
             this.spriteWidth, this.spriteHeight                                   // size of each frame (sprite), refers to character-sheet image
@@ -43,7 +45,7 @@ class Personagem {
         
         this.anima();
     }
-    
+
     anima() {
         this.currentFrame = this.currentFrame >= this.matriz.length - 1 ? 0 : this.currentFrame + 1;
     }

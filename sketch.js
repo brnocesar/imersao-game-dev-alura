@@ -1,12 +1,16 @@
 let imagemCenario;
 let imageCharacter;
+let imageEnemy;
+
 let cenario;
-let character;
 let backgroundMusic;
+let character;
+let enemy;
 
 function preload() {
     imagemCenario   = loadImage('assets/images/scenario/florest.png');
     imageCharacter  = loadImage('assets/images/main-character/running.png');
+    imageEnemy      = loadImage('assets/images/enemies/droplet.png');
     backgroundMusic = loadSound('assets/sounds/soundtrack.mp3');
 }
 
@@ -17,10 +21,16 @@ function setup() {
     frameRate(40);
     character = new Personagem(
         imageCharacter,
-        880,            // horizontal dimension from image
-        1080,           // vertical dimension from image
-        4,              // columns, frames per row
-        4               // rows, frames per column
+        880, 1080,      // character-sheet dimension image (x,y)
+        110, 135,       // character dimension
+        220, 270        // sprite dimension
+    );
+    enemy = new Enemy(
+        imageEnemy,
+        416, 728,      // character-sheet dimension image (x,y)
+        52, 52,       // character dimension
+        104, 104,       // sprite dimension
+        width - 52
     );
 }
 
@@ -29,6 +39,7 @@ function draw() {
     cenario.move();
     
     character.exibe();
+    enemy.exibe();
 
     circle(mouseX, mouseY, 50);
 }
