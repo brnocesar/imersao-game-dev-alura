@@ -1,6 +1,6 @@
 class Animation {
 
-    constructor(sheetImage, sheetImageWidth, sheetImageHeight, characterWidht, characterHeight, spriteWidth, spriteHeight, x) {
+    constructor(sheetImage, sheetImageWidth, sheetImageHeight, characterWidht, characterHeight, spriteWidth, spriteHeight, xPosition) {
 
         this.sheetImage       = sheetImage;
         this.sheetImageWidth  = sheetImageWidth;
@@ -9,8 +9,8 @@ class Animation {
         this.characterHeight  = characterHeight;
         this.spriteWidth      = spriteWidth;
         this.spriteHeight     = spriteHeight;
-        this.x                = x;
-        this.y                = height - this.characterHeight;
+        this.xPosition        = xPosition;
+        this.yPosition        = height - this.characterHeight;
         this.matriz           = calculaMatriz();
         this.currentFrame     = 0;
 
@@ -34,10 +34,11 @@ class Animation {
         }
     }
 
+    // place() { /* aqui ja vai ter todas as açoes do inimigo: idle(), walk() */
     exibe() {
         image(
             this.sheetImage,                                                      // character-sheet image
-            this.x, this.y,                                                       // top-left corner position from character, refers to canvas
+            this.xPosition, this.yPosition,                                       // top-left corner position from character, refers to canvas
             this.characterWidht, this.characterHeight,                            // character size, refers to canvas
             this.matriz[this.currentFrame][0], this.matriz[this.currentFrame][1], // top-left corner position from frame, refers to refers to character-sheet image
             this.spriteWidth, this.spriteHeight                                   // size of each frame (sprite), refers to character-sheet image
@@ -46,6 +47,7 @@ class Animation {
         this.anima();
     }
 
+    // idle() {
     anima() {
         this.currentFrame = this.currentFrame >= this.matriz.length - 1 ? 0 : this.currentFrame + 1;
     }

@@ -1,50 +1,46 @@
-class Personagem {
+class Personagem extends Animation{
     
-    constructor(sheetImage, sheetImageWidth, sheetImageHeight, characterWidht, characterHeight, spriteWidth, spriteHeight) {
+    constructor(sheetImage, sheetImageWidth, sheetImageHeight, characterWidht, characterHeight, spriteWidth, spriteHeight, xPosition) {
+
+        super(sheetImage, sheetImageWidth, sheetImageHeight, characterWidht, characterHeight, spriteWidth, spriteHeight, xPosition);
         
-        this.sheetImage       = sheetImage;
-        this.sheetImageWidth  = sheetImageWidth;
-        this.sheetImageHeight = sheetImageHeight;
-        this.characterWidht   = characterWidht;
-        this.characterHeight  = characterHeight;
-        this.spriteWidth      = spriteWidth;
-        this.spriteHeight     = spriteHeight;
-        this.matriz           = calculaMatriz();
-        this.currentFrame     = 0;
+        this.yInitial     = height - this.characterHeight;
+        this.yPosition    = this.yInitial;
+        this.jumpVelocity = 0;
+        this.gravity      = 4;
+    }
+    
+    jump() {
+        this.jumpVelocity = -32;
+    }
 
-        function calculaMatriz () {
-            
-            let matriz  = [];
-            let xFrames = sheetImageWidth / spriteWidth;
-            let yFrames = sheetImageHeight / spriteHeight;
+    applyGravity() {
+        this.yPosition += this.jumpVelocity
+        this.jumpVelocity += this.gravity;
 
-            for (let y = yFrames; y > 0 ; y--) {
-                for (let x = xFrames; x > 0; x--) {
-                    
-                    matriz.push([
-                        sheetImageWidth - x * spriteWidth,
-                        sheetImageHeight - y * spriteHeight,
-                    ]);
-                }
-            }
-            
-            return matriz;
+        if ( this.yPosition > this.yInitial ) {
+            this.yPosition = this.yInitial;
         }
     }
-    
-    exibe() {
-        image(
-            this.sheetImage,                                                      // character-sheet image
-            0, height - this.characterHeight,                                     // top-left corner character position, refers to canvas
-            this.characterWidht, this.characterHeight,                            // character size, refers to canvas
-            this.matriz[this.currentFrame][0], this.matriz[this.currentFrame][1], // top-left corner position from frame, refers to refers to character-sheet image
-            this.spriteWidth, this.spriteHeight                                   // size of each frame (sprite), refers to character-sheet image
-        );
-        
-        this.anima();
-    }
-    
-    anima() {
-        this.currentFrame = this.currentFrame >= this.matriz.length - 1 ? 0 : this.currentFrame + 1;
+
+    isColliding(enemy) {
+
+        // noFill();
+        // rect(this.xPosition, this.yPosition, this.characterWidht, this.characterHeight);
+        // rect(enemy.xPosition, enemy.yPosition, enemy.characterWidht, enemy.characterHeight);
+        // return false;
+
+        const accuracy = 0.7; // "hitbox"
+
+        return collideRectRect(
+            this.xPosition,
+            this.yPosition,
+            this.characterWidht * accuracy,
+            this.characterHeight * accuracy,
+            enemy.xPosition,
+            enemy.yPosition,
+            enemy.characterWidht * accuracy,
+            enemy.characterHeight * accuracy
+        )
     }
 }
