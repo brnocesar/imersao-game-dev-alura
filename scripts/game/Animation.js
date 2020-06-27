@@ -1,16 +1,19 @@
 class Animation {
 
-    constructor(sheetImage, sheetImageWidth, sheetImageHeight, characterWidht, characterHeight, spriteWidth, spriteHeight, xPosition) {
+    constructor(sheetImage, sheetImageWidth, sheetImageHeight, spriteWidth, spriteHeight, numSprites, characterWidht, characterHeight, xPosition, baseHeight) {
 
         this.sheetImage       = sheetImage;
         this.sheetImageWidth  = sheetImageWidth;
         this.sheetImageHeight = sheetImageHeight;
-        this.characterWidht   = characterWidht;
-        this.characterHeight  = characterHeight;
         this.spriteWidth      = spriteWidth;
         this.spriteHeight     = spriteHeight;
+        this.numSprites       = numSprites;
+        this.characterWidht   = characterWidht;
+        this.characterHeight  = characterHeight;
+        this.groundHeight     = 30;
+        this.baseHeight       = baseHeight;
         this.xPosition        = xPosition;
-        this.yPosition        = height - this.characterHeight;
+        this.yPosition        = height - this.characterHeight - this.groundHeight - this.baseHeight;
         this.matriz           = calculaMatriz();
         this.currentFrame     = 0;
 
@@ -19,6 +22,7 @@ class Animation {
             let matriz  = [];
             let xFrames = sheetImageWidth / spriteWidth;
             let yFrames = sheetImageHeight / spriteHeight;
+            let frames  = 0;
 
             for (let y = yFrames; y > 0 ; y--) {
                 for (let x = xFrames; x > 0; x--) {
@@ -27,6 +31,11 @@ class Animation {
                         sheetImageWidth - x * spriteWidth,
                         sheetImageHeight - y * spriteHeight,
                     ]);
+                    frames++;
+
+                    if ( frames >= numSprites ) {
+                        return matriz;
+                    }
                 }
             }
             
@@ -36,6 +45,8 @@ class Animation {
 
     // place() { /* aqui ja vai ter todas as açoes do inimigo: idle(), walk() */
     exibe() {
+        // noFill();
+        rect(this.xPosition, this.yPosition, this.characterWidht, this.characterHeight);
         image(
             this.sheetImage,                                                      // character-sheet image
             this.xPosition, this.yPosition,                                       // top-left corner position from character, refers to canvas

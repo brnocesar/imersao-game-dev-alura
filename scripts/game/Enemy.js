@@ -1,12 +1,14 @@
 class Enemy extends Animation {
 
-    constructor(sheetImage, sheetImageWidth, sheetImageHeight, characterWidht, characterHeight, spriteWidth, spriteHeight, xPosition) {
-        super(sheetImage, sheetImageWidth, sheetImageHeight, characterWidht, characterHeight, spriteWidth, spriteHeight, xPosition);
+    constructor(sheetImage, sheetImageWidth, sheetImageHeight, spriteWidth, spriteHeight, numSprites, characterWidht, characterHeight, xPosition, baseHeight, velocity, delayToAppears) {
+        super(sheetImage, sheetImageWidth, sheetImageHeight, spriteWidth, spriteHeight, numSprites, characterWidht, characterHeight, xPosition, baseHeight);
         
-        this.velocity = 10;
+        this.velocity       = velocity;
+        this.delayToAppears = delayToAppears;
+        this.xPosition      = width + this.delayToAppears
     }
     
     walk() {
-        this.xPosition = this.xPosition < (-this.characterWidht) ? width : this.xPosition - this.velocity;
+        this.xPosition = this.xPosition < -this.characterWidht - this.delayToAppears ? width : this.xPosition - this.velocity;
     }
 }

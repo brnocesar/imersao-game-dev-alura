@@ -1,17 +1,23 @@
 class Personagem extends Animation{
     
-    constructor(sheetImage, sheetImageWidth, sheetImageHeight, characterWidht, characterHeight, spriteWidth, spriteHeight, xPosition) {
+    constructor(sheetImage, sheetImageWidth, sheetImageHeight, spriteWidth, spriteHeight, numSprites, characterWidht, characterHeight, xPosition, baseHeight) {
 
-        super(sheetImage, sheetImageWidth, sheetImageHeight, characterWidht, characterHeight, spriteWidth, spriteHeight, xPosition);
+        super(sheetImage, sheetImageWidth, sheetImageHeight, spriteWidth, spriteHeight, numSprites, characterWidht, characterHeight, xPosition, baseHeight);
         
-        this.yInitial     = height - this.characterHeight;
+        this.yInitial     = height - this.characterHeight - this.groundHeight - this.baseHeight;
         this.yPosition    = this.yInitial;
         this.jumpVelocity = 0;
         this.gravity      = 4;
+        this.impulse      = -32;
+        this.jumpsInARow  = 0;
+        this.maxJumps     = 2;
     }
     
     jump() {
-        this.jumpVelocity = -32;
+        if (this.jumpsInARow < this.maxJumps) {
+            this.jumpVelocity = this.impulse;
+            this.jumpsInARow++;
+        }
     }
 
     applyGravity() {
@@ -20,15 +26,12 @@ class Personagem extends Animation{
 
         if ( this.yPosition > this.yInitial ) {
             this.yPosition = this.yInitial;
+            this.jumpsInARow = 0;
         }
     }
 
+    // tornar a "precisao" uniforme em todas as direções
     isColliding(enemy) {
-
-        // noFill();
-        // rect(this.xPosition, this.yPosition, this.characterWidht, this.characterHeight);
-        // rect(enemy.xPosition, enemy.yPosition, enemy.characterWidht, enemy.characterHeight);
-        // return false;
 
         const accuracy = 0.7; // "hitbox"
 
