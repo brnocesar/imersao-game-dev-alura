@@ -1,6 +1,6 @@
 let backgroundMusic;
 let currentScene = 'openingScreen';
-// let currentScene = 'gameplay';
+// /*dev*/ let currentScene = 'gameplay';
 let allScenes;
 
 let imageOpeningScreen;
@@ -14,6 +14,10 @@ let scenario;
 let score;
 let imageHipsta;
 let hipsta;
+let imageLifeIndicator;
+let lifeIndicator;
+let configFile;
+
 let imageDroplet;
 let droplet;
 let imageTroll;

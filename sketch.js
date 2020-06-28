@@ -1,7 +1,7 @@
 function setup() {
 
     // setar as dimensoes sempre em proporcao fixa, de acordo com o tamanho da tela
-    createCanvas(1280, 720);
+    createCanvas(configFile.screen.width, configFile.screen.height);
     frameRate(40);
     backgroundMusic.loop();
     

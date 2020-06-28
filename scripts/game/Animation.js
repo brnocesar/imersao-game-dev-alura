@@ -45,8 +45,10 @@ class Animation {
 
     // place() { /* aqui ja vai ter todas as açoes do inimigo: idle(), walk() */
     exibe() {
-        // noFill();
-        rect(this.xPosition, this.yPosition, this.characterWidht, this.characterHeight);
+        // /*dev*/ noFill();
+        // /*dev*/ rect(this.xPosition, this.yPosition, this.characterWidht, this.characterHeight);
+        /*dev*/ circle(this.xPosition + this.characterWidht/2, this.yPosition + this.characterHeight/2, (this.characterWidht + this.characterHeight)/2);
+        
         image(
             this.sheetImage,                                                      // character-sheet image
             this.xPosition, this.yPosition,                                       // top-left corner position from character, refers to canvas
@@ -58,7 +60,10 @@ class Animation {
         this.anima();
     }
 
-    // idle() {
+    // idle() {}
+    // running() {}
+    //jumping() {}
+    // flying() {}
     anima() {
         this.currentFrame = this.currentFrame >= this.matriz.length - 1 ? 0 : this.currentFrame + 1;
     }

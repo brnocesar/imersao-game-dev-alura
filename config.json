@@ -1,0 +1,16 @@
+{
+    "screen": {
+        "width": 1366,
+        "height": 760
+    }, 
+    "hipsta": {
+        "maxLife": 5,
+        "initialLife": 3
+    },
+    "map": [
+        {
+            "enemy": 0,
+            "velocity": 10
+        }
+    ]
+}

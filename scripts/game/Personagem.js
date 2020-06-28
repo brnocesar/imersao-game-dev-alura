@@ -11,6 +11,7 @@ class Personagem extends Animation{
         this.impulse      = -32;
         this.jumpsInARow  = 0;
         this.maxJumps     = 2;
+        this.invincible   = false;
     }
     
     jump() {
@@ -30,12 +31,19 @@ class Personagem extends Animation{
         }
     }
 
+    becomesInvincible() {
+        this.invincible = true;
+        // setTimeout(() => {
+        //     this.invincible = false;
+        // }, 1000);
+    }
+
     // tornar a "precisao" uniforme em todas as direções
     isColliding(enemy) {
 
         const accuracy = 0.7; // "hitbox"
 
-        return collideRectRect(
+        const result = collideRectRect(
             this.xPosition,
             this.yPosition,
             this.characterWidht * accuracy,
@@ -44,6 +52,12 @@ class Personagem extends Animation{
             enemy.yPosition,
             enemy.characterWidht * accuracy,
             enemy.characterHeight * accuracy
-        )
+        );
+
+        if ( !result ) {
+            this.invincible = false;
+        }
+
+        return result && !this.invincible;
     }
 }

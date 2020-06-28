@@ -13,7 +13,7 @@ class Button {
 
     draw() {
         this.button.position(this.xPosition, this.yPosition);
-        this.button.center('horizontal');
+        // this.button.center('horizontal');
     }
 
     _changeScene() {

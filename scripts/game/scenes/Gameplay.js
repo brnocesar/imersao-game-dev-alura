@@ -4,12 +4,17 @@ class Gameplay {
     constructor() {
 
         this.currentEnemy = 0;
+        this.map          = configFile.map;
     }
 
     setup() {
         
-        scenario = new Scenario(imageScenario, 3);
-        score   = new Score();
+        scenario      = new Scenario(imageScenario, 3);
+        lifeIndicator = new Life(
+            configFile.hipsta.maxLife,
+            configFile.hipsta.initialLife
+        );
+        score         = new Score();
 
         hipsta = new Personagem(
             imageHipsta,
@@ -20,19 +25,19 @@ class Gameplay {
             imageDroplet,
             416, 728, 104, 104, 28,      // character-sheet dimension image (x,y), sprite dimension (x,y), sprites quantity on sheet
             52, 52, width - 52, 0,       // character dimension (x,y), initial position (x), base height (y)
-            10, 0                        // velocity (x), delay to it appears on screen
+            10                           // velocity (x)
         );
         troll = new Enemy(
             imageTroll,
             1904, 1692, 380.8, 282, 28,
             254, 188, width - 254, 0,
-            6, 0
+            6
         );
         flyingDroplet = new Enemy(
             imageFlyingDroplet, 
             549, 648, 183, 108, 16, 
             91.5, 54, width - 91.5, 100, 
-            6, 0
+            6
         );
     
         enemies.push(droplet);
@@ -42,7 +47,8 @@ class Gameplay {
 
     keyPressed(key) {
     
-        if (key == 'ArrowUp') {
+        // gambiarra
+        if (key == 'ArrowUp' && hipsta.invincible == false) {
             hipsta.jump();
             jumpSoundEffect.play();
         }
@@ -51,30 +57,38 @@ class Gameplay {
     draw() {
         scenario.exibe();
         scenario.move();
+        lifeIndicator.draw();
         score.show();
         score.increase();
         
         hipsta.exibe();
         hipsta.applyGravity();
-    
-        const enemy = enemies[this.currentEnemy];
+
+        const currentMapRow = this.map[this.currentEnemy]  
+        const enemy = enemies[currentMapRow.enemy];
         const enemyOffScreen = enemy.xPosition < -enemy.characterWidht;
+
+        enemy.velocity = currentMapRow.velocity;
         
         enemy.exibe();
         enemy.walk();
     
         if ( enemyOffScreen ) {
             this.currentEnemy++;
-            if ( this.currentEnemy >= enemies.length ) {
+            if ( this.currentEnemy >= this.map.length - 1 ) {
                 this.currentEnemy = 0;
             }
-    
-            enemy.velocity = parseInt(random(5, 30));
         }
         
         if ( hipsta.isColliding(enemy) ) {
-            image(gameOverImage, width/2 - 206, height/2 - 36, 412, 72);
-            // noLoop();
+            
+            lifeIndicator.decrease();
+            hipsta.becomesInvincible();
+            
+            if ( lifeIndicator.total === 0 ) {
+                image(gameOverImage, width/2 - 206, height/2 - 36, 412, 72);
+                noLoop();
+            }
         }
         
     
