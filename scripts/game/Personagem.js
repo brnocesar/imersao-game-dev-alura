@@ -1,17 +1,16 @@
 class Personagem extends Animation{
     
-    constructor(sheetImage, sheetImageWidth, sheetImageHeight, spriteWidth, spriteHeight, numSprites, characterWidht, characterHeight, xPosition, baseHeight) {
+    constructor(regularSheetImg, invincibleSheetImg, sheetImgWidth, sheetImgHeight, spriteWidth, spriteHeight, numSprites, characterWidht, characterHeight, xPosition, baseHeight) {
 
-        super(sheetImage, sheetImageWidth, sheetImageHeight, spriteWidth, spriteHeight, numSprites, characterWidht, characterHeight, xPosition, baseHeight);
+        super(regularSheetImg, invincibleSheetImg, sheetImgWidth, sheetImgHeight, spriteWidth, spriteHeight, numSprites, characterWidht, characterHeight, xPosition, baseHeight);
         
         this.yInitial     = height - this.characterHeight - this.groundHeight - this.baseHeight;
         this.yPosition    = this.yInitial;
         this.jumpVelocity = 0;
-        this.gravity      = 4;
-        this.impulse      = -32;
+        this.gravity      = configFile.gameplay.gravity;
+        this.impulse      = configFile.hipsta.impulse;
         this.jumpsInARow  = 0;
-        this.maxJumps     = 2;
-        this.invincible   = false;
+        this.maxJumps     = configFile.hipsta.maxJumps;
     }
     
     jump() {
@@ -33,9 +32,7 @@ class Personagem extends Animation{
 
     becomesInvincible() {
         this.invincible = true;
-        // setTimeout(() => {
-        //     this.invincible = false;
-        // }, 1000);
+        // hitDamageSoundEffect.play();
     }
 
     // tornar a "precisao" uniforme em todas as direções

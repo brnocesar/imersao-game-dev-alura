@@ -3,27 +3,27 @@ class OpeningScreen {
     constructor() {
 
         this.titleHeight = height * 0.25;
+        this.menuHeight = height * 0.075;
+        this.menu = [];
     }
 
     setup() {
         // openingScreen = new Scenario(imageOpeningBackground, 1);
-        // buttonStart = new Button('Iniciar', width/2, height/2); // porque nao aqui
+        buttonStart   = new Button('Jogar', width/2 - 65, height/2);
+        buttonHistory = new Button('História da Hipsta', width/2 - 200, height/2);
+        buttonHelp    = new Button('Controles', width/2 - 115, height/2);
+
+        this.menu.push(buttonStart);
+        this.menu.push(buttonHistory);
+        this.menu.push(buttonHelp);
     }
 
     keyPressed(key) {
-    
-    }
-
-    draw() {
-        this._backgroundImage();
-        this._title();
-        this._button();
-        // texto, logo
-        // botao de jogar
+        // navegar entre os botoes
     }
 
     _backgroundImage() {
-        image(imageOpeningScreen, 0, 0, width, height);
+        image(imgOpeningScreen, 0, 0, width, height);
     }
 
     _title() {
@@ -35,8 +35,20 @@ class OpeningScreen {
         text('HIPSTA', width/2 + 12, this.titleHeight + 55);
     }
 
-    _button() {
-        buttonStart.yPosition = height * 5/7;
-        buttonStart.draw();
+    _menu() {
+        let i = 2; // colocar no config.json
+        this.menu.map(button => {
+            i++;
+            button.yPosition = height/2 + i*this.menuHeight;
+            button.draw();
+        });
+    }
+
+    draw() {
+        this._backgroundImage();
+        this._title();
+        this._menu();
+        // texto, logo
+        // botao de jogar
     }
 }

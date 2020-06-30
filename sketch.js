@@ -15,8 +15,6 @@ function setup() {
         openingScreen,
         gameplay
     };
-
-    buttonStart = new Button('Iniciar', width/2, height/2);
 }
 
 function keyPressed() {

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
 
 html, body {
     margin: 0;
@@ -9,19 +9,21 @@ canvas {
 }
 
 .start-play-button {
-    font-family: 'Luckiest Guy', cursive;
-    padding: 1rem 1.25rem;
-    font-size: 1.5rem;
-    letter-spacing: .25rem;
-    box-shadow: 2px 2px 0px 1px #4a4c69;
-    text-transform: uppercase;
-    background-color: #8386b5;
+    font-family: 'Pangolin', cursive;
+    background-color: Transparent;
+    background-repeat:no-repeat;
     border: none;
-    border-radius: .75rem;
-    color: #fff;
+    overflow: hidden;
+    outline:none;
+    padding: 0rem;
+    color: #8386b5;
+    text-shadow: 2px 2px #4a4c69;
+    font-size: 2.5rem;
+    letter-spacing: .25rem;
+    text-transform: uppercase;
 }
 
 .start-play-button:hover {
-    background-color: #ffc0c1;
-    box-shadow: 2px 2px 0px 1px #b58a8a;
+    color: #ffc0c1;
+    text-shadow: 2px 2px #b58a8a;
 }

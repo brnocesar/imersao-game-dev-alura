@@ -1,10 +1,12 @@
 class Button {
 
-    constructor(text, xPosition, yPosition) {
+    constructor(text, xPosition, yPosition/* , destination */) {
 
         this.text      = text;
         this.xPosition = xPosition;
         this.yPosition = yPosition;
+        // this.destination = destination;
+        this.destination = 'gameplay';
         this.button    = createButton(this.text);
         
         this.button.mousePressed(() => this._changeScene());
@@ -13,11 +15,17 @@ class Button {
 
     draw() {
         this.button.position(this.xPosition, this.yPosition);
-        // this.button.center('horizontal');
     }
 
     _changeScene() {
-        this.button.remove();
-        currentScene = 'gameplay';
+        let buttons = document.getElementsByTagName("button");
+        for (let i=0; i<buttons.length; i++) {
+            buttons[i].remove();
+        }
+        buttons = document.getElementsByTagName("button");
+        for (let i=0; i<buttons.length; i++) {
+            buttons[i].remove();
+        }
+        currentScene = this.destination;
     }
 }

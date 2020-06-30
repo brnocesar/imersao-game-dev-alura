@@ -3,16 +3,20 @@ let currentScene = 'openingScreen';
 // /*dev*/ let currentScene = 'gameplay';
 let allScenes;
 
-let imageOpeningScreen;
+let imgOpeningScreen;
 let fontOpeningScreen;
 let openingScreen;
 let buttonStart;
+let buttonPlay;
+let buttonHistory;
+let buttonHelp;
 
 let gameplay;
 let imageScenario;
 let scenario;
 let score;
-let imageHipsta;
+let imgHipsta;
+let imgInvincibleHipsta;
 let hipsta;
 let imageLifeIndicator;
 let lifeIndicator;
