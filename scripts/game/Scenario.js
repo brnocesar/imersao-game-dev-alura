@@ -1,5 +1,7 @@
 class Scenario {
-    constructor(imagem, velocidade){
+
+    constructor(imagem, velocidade) {
+
         this.imagem = imagem;
         this.velocidade = velocidade;
         this.x1 = 0;
@@ -11,7 +13,7 @@ class Scenario {
         image(this.imagem, this.x2, 0, width, height);
     }
     
-    move(){
+    move() {
         this.x1 -=  this.velocidade;
         this.x2 -=  this.velocidade;
         
@@ -21,5 +23,9 @@ class Scenario {
         if (this.x2 < -width) {
             this.x2 = width;
         }
+    }
+
+    changeVelocity(delta) {
+        this.velocidade += delta;
     }
 } 

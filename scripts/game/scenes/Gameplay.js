@@ -10,12 +10,12 @@ class Gameplay {
     setup() {
         
         scenario      = new Scenario(imageScenario, 3);
+        score         = new Score();
         lifeIndicator = new Life(
             configFile.hipsta.maxLife,
             configFile.hipsta.initialLife
         );
-        score         = new Score();
-
+        
         hipsta = new Personagem(
             imgHipsta, imgInvincibleHipsta,
             880, 1080, 220, 270, 16,     // character-sheet dimension image (x,y), sprite dimension (x,y), sprites quantity on sheet
@@ -47,10 +47,12 @@ class Gameplay {
 
     keyPressed(key) {
     
-        // gambiarra
         if (key == 'ArrowUp' && hipsta.invincible == false) {
             hipsta.jump();
-            jumpSoundEffect.play();
+        }
+
+        if (key == 'ArrowRight' && hipsta.invincible == false) {
+            hipsta.startDash(scenario);
         }
     }
 
@@ -66,6 +68,7 @@ class Gameplay {
         const enemyOffScreen = enemy.xPosition < -enemy.characterWidht;
 
         enemy.velocity = currentMapRow.velocity;
+        hipsta.countDashFrames(scenario, enemies);
         
         enemy.show();
         enemy.walk();
@@ -90,7 +93,6 @@ class Gameplay {
                 // noLoop();
             }
         }
-        
     
         circle(mouseX, mouseY, 50);
     }

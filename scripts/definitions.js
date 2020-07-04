@@ -7,7 +7,6 @@ let imgOpeningScreen;
 let fontOpeningScreen;
 let openingScreen;
 let buttonStart;
-let buttonPlay;
 let buttonHistory;
 let buttonHelp;
 

@@ -26,6 +26,7 @@ class Button {
         for (let i=0; i<buttons.length; i++) {
             buttons[i].remove();
         }
+        
         currentScene = this.destination;
     }
 }
