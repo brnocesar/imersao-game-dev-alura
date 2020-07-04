@@ -46,7 +46,7 @@ class Animation {
     }
 
     show() {
-        /*dev*/ noFill();
+        // /*dev*/ noFill();
         /*dev*/ rect(this.xPosition, this.yPosition, this.characterWidht, this.characterHeight);
         /*dev*/ circle(this.xPosition + this.characterWidht/2, this.yPosition + this.characterHeight/2, (this.characterWidht + this.characterHeight)/2);
         

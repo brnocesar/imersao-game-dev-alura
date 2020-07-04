@@ -2,6 +2,7 @@ function preload() {
     configFile          = loadJSON('config.json')
     backgroundMusic     = loadSound('assets/sounds/soundtrack.mp3');
     imgOpeningScreen    = loadImage('assets/images/opening/home.png');
+    imgExtraWitch       = loadImage('assets/images/opening/silhouette.png');
     fontOpeningScreen   = loadFont('assets/images/opening/font-hs.otf');
     imageScenario       = loadImage('assets/images/gameplay/scenario/florest.png');
     imgHipsta           = loadImage('assets/images/gameplay/main/running.png');

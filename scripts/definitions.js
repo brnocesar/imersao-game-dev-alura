@@ -4,6 +4,8 @@ let currentScene = 'openingScreen';
 let allScenes;
 
 let imgOpeningScreen;
+let imgExtraWitch;
+let extraWitch;
 let fontOpeningScreen;
 let openingScreen;
 let buttonStart;
