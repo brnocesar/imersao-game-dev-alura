@@ -3,8 +3,11 @@
         "gravity": 4
     },
     "hipsta": {
-        "maxLife": 5,
+        "maxLife": 3,
         "initialLife": 3,
+        "maxSpecial": 3,
+        "initialSpecial": 1,
+        "beatedEnemiesForSpecial": 3,
         "impulse": -32,
         "maxJumps": 2
     },
@@ -15,19 +18,19 @@
     "map": [
         {
             "enemy": 0,
-            "velocity": 10
+            "velocity": 8
         },
         {
             "enemy": 0,
-            "velocity": 15
+            "velocity": 10
         },
         {
             "enemy": 2,
-            "velocity": 10
+            "velocity": 11
         },
         {
             "enemy": 0,
-            "velocity": 15
+            "velocity": 9
         },
         {
             "enemy": 2,
@@ -35,7 +38,7 @@
         },
         {
             "enemy": 0,
-            "velocity": 10
+            "velocity": 7
         },
         {
             "enemy": 1,
@@ -47,7 +50,7 @@
         },
         {
             "enemy": 0,
-            "velocity": 15
+            "velocity": 9
         },
         {
             "enemy": 2,

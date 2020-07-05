@@ -1,8 +1,8 @@
 class Personagem extends Animation{
     
-    constructor(regularSheetImg, invincibleSheetImg, sheetImgWidth, sheetImgHeight, spriteWidth, spriteHeight, numSprites, characterWidht, characterHeight, xPosition, baseHeight) {
+    constructor(regularSheetImg, invincibleSheetImg, dashSheetImg, sheetImgWidth, sheetImgHeight, spriteWidth, spriteHeight, numSprites, characterWidht, characterHeight, xPosition, baseHeight) {
 
-        super(regularSheetImg, invincibleSheetImg, sheetImgWidth, sheetImgHeight, spriteWidth, spriteHeight, numSprites, characterWidht, characterHeight, xPosition, baseHeight);
+        super(regularSheetImg, invincibleSheetImg, dashSheetImg, sheetImgWidth, sheetImgHeight, spriteWidth, spriteHeight, numSprites, characterWidht, characterHeight, xPosition, baseHeight);
         
         this.yInitial      = height - this.characterHeight - this.groundHeight - this.baseHeight;
         this.yPosition     = this.yInitial;
@@ -12,7 +12,6 @@ class Personagem extends Animation{
         this.jumpsInARow   = 0;
         this.maxJumps      = configFile.hipsta.maxJumps;
         this.dashVelocity  = 20;
-        this.activeDash    = false;
         this.dashingFrames = 0;
         this.dashDuration  = 20 
     }
@@ -37,10 +36,11 @@ class Personagem extends Animation{
 
     startDash(scenario) {
 
-        if ( !this.activeDash ) {
+        if ( !this.activeDash && specialIndicator.notEmpty() ) {
 
             this.activeDash = true;
             scenario.changeVelocity(this.dashVelocity);
+            specialIndicator.decrease();
         }
     }
 

@@ -10,7 +10,7 @@ class OpeningScreen {
     setup() {
 
         extraWitch = new Enemy(
-            imgExtraWitch, imgExtraWitch,
+            imgExtraWitch, imgExtraWitch, imgExtraWitch,
             733, 688, 733, 688, 1,
             100, 94, width - 50, height - 155,
             3

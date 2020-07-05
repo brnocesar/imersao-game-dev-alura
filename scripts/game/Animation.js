@@ -1,9 +1,10 @@
 class Animation {
 
-    constructor(regularSheetImg, invincibleSheetImg, sheetImgWidth, sheetImgHeight, spriteWidth, spriteHeight, numSprites, characterWidht, characterHeight, xPosition, baseHeight) {
+    constructor(regularSheetImg, invincibleSheetImg, dashSheetImg, sheetImgWidth, sheetImgHeight, spriteWidth, spriteHeight, numSprites, characterWidht, characterHeight, xPosition, baseHeight) {
 
         this.regularSheetImg    = regularSheetImg;
         this.invincibleSheetImg = invincibleSheetImg;
+        this.dashSheetImg       = dashSheetImg;
         this.sheetImgWidth      = sheetImgWidth;
         this.sheetImgHeight     = sheetImgHeight;
         this.spriteWidth        = spriteWidth;
@@ -18,6 +19,7 @@ class Animation {
         this.matriz             = calculaMatriz();
         this.currentFrame       = 0;
         this.invincible         = false;
+        this.activeDash         = false;
 
         function calculaMatriz () {
             
@@ -51,7 +53,7 @@ class Animation {
         /*dev*/ circle(this.xPosition + this.characterWidht/2, this.yPosition + this.characterHeight/2, (this.characterWidht + this.characterHeight)/2);
         
         image(
-            this.invincible ? this.invincibleSheetImg : this.regularSheetImg,     // character-sheet image
+            this.invincible ? this.invincibleSheetImg : this.activeDash ? this.dashSheetImg : this.regularSheetImg,     // character-sheet image
             this.xPosition, this.yPosition,                                       // top-left corner position from character, refers to canvas
             this.characterWidht, this.characterHeight,                            // character size, refers to canvas
             this.matriz[this.currentFrame][0], this.matriz[this.currentFrame][1], // top-left corner position from frame, refers to refers to character-sheet image
